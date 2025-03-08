@@ -105,12 +105,12 @@ const Hero = () => {
       <div className="hidden lg:block absolute -bottom-10 left-1/2 -translate-x-1/2 w-full max-w-6xl">
         <div className="relative">
           <div className="absolute inset-0 rounded-t-3xl bg-gradient-to-t from-white via-white/80 to-transparent z-10"></div>
-          <img 
+          {/* <img 
             ref={imageRef}
             src="/lovable-uploads/b6823b88-a286-449e-85b2-52c81994ab78.png" 
             className="w-full h-auto rounded-t-3xl shadow-2xl shadow-black/5 transition-transform duration-500 ease-out" 
             alt="Fine art gallery" 
-          />
+          /> */}
         </div>
       </div>
     </div>
