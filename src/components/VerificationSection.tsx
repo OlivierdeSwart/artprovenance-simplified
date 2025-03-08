@@ -159,7 +159,7 @@ const VerificationSection = () => {
                     
                     <div>
                       <p className="text-xs text-gray-500">Custodian</p>
-                      <p className="font-medium text-gray-900">Sotheby's Fine Art</p>
+                      <p className="font-medium text-gray-900">Ardent & Sons Fine Collectibles</p>
                     </div>
                     
                     <div>
