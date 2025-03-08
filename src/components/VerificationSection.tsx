@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Database, FileLock, Globe } from 'lucide-react';
+import { Database, FileLock, Globe, ShieldCheck } from 'lucide-react';
 
 const VerificationSection = () => {
   const [ref, inView] = useInView({
@@ -131,7 +131,7 @@ const VerificationSection = () => {
                       <p className="text-sm text-gray-500 mt-1">Digital Verification Record</p>
                     </div>
                     <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
-                      <Shield className="h-7 w-7 text-primary" />
+                      <ShieldCheck className="h-7 w-7 text-primary" />
                     </div>
                   </div>
                   
