@@ -9,25 +9,25 @@ const features = [
     id: 1,
     title: "Create",
     description: "Register artwork with verified digital certificates and establish provenance from the start",
-    image: "/lovable-uploads/34e0768b-6391-47e4-a78a-93830d429f1d.png"
+    image: "/lovable-uploads/984e270a-941a-4b0b-bd5a-3be2651cc6da.png"
   },
   {
     id: 2,
     title: "Sell",
     description: "List your artwork with transparent pricing and fractional ownership options",
-    image: "/lovable-uploads/df11e6ff-05e3-4d60-9a89-aa92a74b299b.png"
+    image: "/lovable-uploads/0d8a6662-dc2c-42d1-a0be-49ce89629bbe.png"
   },
   {
     id: 3,
     title: "Buy",
     description: "Browse authenticated fine art from verified collections with secure transactions",
-    image: "/lovable-uploads/740c62d2-8a65-4f8d-8b34-7d8e806a134e.png"
+    image: "/lovable-uploads/45bf7322-a5ad-4b51-ab76-62e36eb5c2a8.png"
   },
   {
     id: 4,
     title: "Manage",
     description: "Track your digital collection and monitor value appreciation in real-time",
-    image: "/lovable-uploads/db820f00-37b3-4e6b-952c-57f05d6a638f.png"
+    image: "/lovable-uploads/f83ab582-e574-4349-a8e9-b5fb27ededed.png"
   }
 ];
 
@@ -108,20 +108,14 @@ const CarouselFeature = () => {
   return (
     <section className="w-full py-16 bg-white relative overflow-hidden" id="platform-features">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary mb-4">
             PLATFORM FEATURES
           </span>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
-            How Our Platform Works
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Our intuitive platform makes it easy to create, sell, buy, and manage verified digital fine art
-          </p>
         </div>
 
         <div 
-          className="relative w-full h-[600px] md:h-[650px] mx-auto overflow-hidden rounded-xl shadow-xl"
+          className="relative w-full h-[650px] md:h-[700px] mx-auto overflow-hidden rounded-xl shadow-xl"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -133,26 +127,28 @@ const CarouselFeature = () => {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="absolute inset-0 w-full h-full"
+              className="absolute inset-0 w-full h-full flex flex-col"
             >
-              <div className="relative w-full h-full flex flex-col">
-                <div className="relative w-full h-[500px] overflow-hidden bg-gray-900">
-                  <img
-                    src={features[current].image}
-                    alt={features[current].title}
-                    className="w-full h-full object-cover object-top"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
-                </div>
-                
-                <div className="absolute bottom-0 left-0 right-0 p-8 text-center bg-white">
-                  <h3 className="text-2xl md:text-3xl font-bold mb-2 text-gray-900 font-serif">
-                    {features[current].title}
-                  </h3>
-                  <p className="text-gray-600 max-w-2xl mx-auto">
-                    {features[current].description}
-                  </p>
-                </div>
+              {/* Title positioned at the top */}
+              <div className="bg-white p-6 border-b">
+                <h3 className="text-3xl md:text-4xl font-bold text-center text-gray-900 font-serif">
+                  {features[current].title}
+                </h3>
+              </div>
+              
+              <div className="relative flex-grow w-full overflow-hidden bg-gray-100">
+                <img
+                  src={features[current].image}
+                  alt={features[current].title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40"></div>
+              </div>
+              
+              <div className="p-6 bg-white">
+                <p className="text-gray-600 text-lg text-center max-w-3xl mx-auto">
+                  {features[current].description}
+                </p>
               </div>
             </motion.div>
           </AnimatePresence>
@@ -177,7 +173,7 @@ const CarouselFeature = () => {
           </Button>
 
           {/* Dots Indicator */}
-          <div className="absolute bottom-24 left-0 right-0 flex justify-center space-x-2">
+          <div className="absolute bottom-20 left-0 right-0 flex justify-center space-x-2">
             {features.map((_, index) => (
               <button
                 key={index}
