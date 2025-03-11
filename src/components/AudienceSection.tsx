@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -105,7 +104,7 @@ const AudienceSection = () => {
               </div>
               
               <div className="mt-10">
-                <Button className="w-full bg-primary hover:bg-primary/90 text-white transition duration-300">
+                <Button className="w-full bg-accent hover:bg-accent/90 text-white transition duration-300">
                   Start Collecting
                 </Button>
               </div>

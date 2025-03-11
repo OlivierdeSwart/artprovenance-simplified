@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
@@ -51,15 +50,6 @@ const Hero = () => {
       <div className="max-w-7xl mx-auto">
         <div className="relative z-10 py-24 md:py-32 px-6 sm:px-8 xl:px-0">
           <div className="text-center max-w-4xl mx-auto">
-            <motion.div
-              className="inline-block px-3 py-1 mb-6 rounded-full text-xs font-medium bg-primary/10 text-primary"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
-              EXCLUSIVE DIGITAL PROVENANCE
-            </motion.div>
-            
             <motion.h1
               className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-gray-900 mb-6 tracking-tight leading-tight"
               custom={1}
@@ -72,7 +62,7 @@ const Hero = () => {
             </motion.h1>
             
             <motion.p 
-              className="text-lg md:text-xl text-gray-700 mb-10 max-w-2xl mx-auto leading-relaxed"
+              className="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed"
               custom={2}
               initial="hidden"
               animate="visible"
