@@ -31,8 +31,13 @@ const Navbar = () => {
             <nav>
               <ul className="flex space-x-8">
                 <li>
+                  <a href="#platform-features" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors">
+                    Summary
+                  </a>
+                </li>
+                <li>
                   <a href="#how-it-works" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors">
-                    How It Works
+                    Registration Flow
                   </a>
                 </li>
                 <li>
@@ -42,7 +47,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <a href="#technology" className="text-sm font-medium text-gray-700 hover:text-primary transition-colors">
-                    Technology
+                    Security
                   </a>
                 </li>
                 <li>
@@ -97,11 +102,18 @@ const Navbar = () => {
               <div className="-my-6 divide-y divide-gray-200">
                 <div className="space-y-2 py-6">
                   <a
+                    href="#platform-features"
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Summary
+                  </a>
+                  <a
                     href="#how-it-works"
                     className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    How It Works
+                    Registration Flow
                   </a>
                   <a
                     href="#benefits"
@@ -115,7 +127,7 @@ const Navbar = () => {
                     className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Technology
+                    Security
                   </a>
                   <a
                     href="#who-we-serve"

@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronDown } from 'lucide-react';
 
 const Hero = () => {
   const imageRef = useRef<HTMLImageElement>(null);
@@ -108,6 +108,17 @@ const Hero = () => {
           {/* Image placeholder kept intact */}
         </div>
       </div>
+
+      {/* Scroll arrow indicator */}
+      <motion.a 
+        href="#platform-features"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center cursor-pointer"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+      >
+        <span className="text-primary text-sm font-medium mb-2">Scroll Down</span>
+        <ChevronDown className="h-8 w-8 text-primary" />
+      </motion.a>
     </div>
   );
 };
