@@ -26,6 +26,13 @@ const Hero = () => {
     };
   }, []);
 
+  const scrollToSignup = () => {
+    const signupForm = document.getElementById('signup-form');
+    if (signupForm) {
+      signupForm.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const fadeInUpVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: (i: number) => ({
@@ -81,12 +88,12 @@ const Hero = () => {
               animate="visible"
               variants={fadeInUpVariants}
             >
-              <Button className="text-base px-8 py-6 bg-primary text-white hover:bg-primary/90 hover:scale-105 transition-all duration-300 shadow-lg">
+              <Button 
+                className="text-base px-8 py-6 bg-primary text-white hover:bg-primary/90 hover:scale-105 transition-all duration-300 shadow-lg"
+                onClick={scrollToSignup}
+              >
                 Get Started
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button variant="outline" className="text-base px-8 py-6 border-gray-300 hover:border-primary hover:text-primary transition-all duration-300">
-                Learn More
               </Button>
             </motion.div>
           </div>
@@ -116,7 +123,6 @@ const Hero = () => {
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
       >
-        <span className="text-primary text-sm font-medium mb-2">Scroll Down</span>
         <ChevronDown className="h-8 w-8 text-primary" />
       </motion.a>
     </div>

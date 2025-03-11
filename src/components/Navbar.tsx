@@ -1,8 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,13 +19,13 @@ const Navbar = () => {
     <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center py-4 md:py-6">
-          <div className="flex justify-start lg:w-0 lg:flex-1">
+          <div className="flex-shrink-0">
             <a href="/" className="flex items-center">
               <span className="font-serif text-2xl font-bold tracking-tight text-primary">Dobney's</span>
             </a>
           </div>
           
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center justify-center flex-grow">
             <nav>
               <ul className="flex space-x-8">
                 <li>
@@ -57,14 +55,6 @@ const Navbar = () => {
                 </li>
               </ul>
             </nav>
-            <div className="flex items-center space-x-4">
-              <Button variant="outline" className="transition-all duration-300 hover:border-primary hover:text-primary">
-                Sign In
-              </Button>
-              <Button className="bg-primary text-white hover:bg-primary/90 transition-all duration-300">
-                Get Started
-              </Button>
-            </div>
           </div>
           
           <div className="md:hidden">
@@ -136,14 +126,6 @@ const Navbar = () => {
                   >
                     Who We Serve
                   </a>
-                </div>
-                <div className="py-6 space-y-4">
-                  <Button variant="outline" className="w-full" onClick={() => setIsMobileMenuOpen(false)}>
-                    Sign In
-                  </Button>
-                  <Button className="w-full bg-primary text-white" onClick={() => setIsMobileMenuOpen(false)}>
-                    Get Started
-                  </Button>
                 </div>
               </div>
             </div>
