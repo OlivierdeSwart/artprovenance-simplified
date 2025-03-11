@@ -33,7 +33,7 @@ const AudienceSection = () => {
   };
 
   return (
-    <section className="py-24 bg-secondary/50" id="who-we-serve">
+    <section className="py-24" id="who-we-serve">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary mb-4">

@@ -164,7 +164,7 @@ const CarouselFeature = () => {
   );
 
   return (
-    <section className="w-full py-16 bg-green-50/50 relative overflow-hidden" id="platform-features">
+    <section className="w-full py-16 relative overflow-hidden" id="platform-features">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
           <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary mb-4">

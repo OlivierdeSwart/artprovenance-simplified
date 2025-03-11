@@ -89,7 +89,7 @@ const OnboardingFlow = () => {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-secondary/30" id="how-it-works">
+    <section className="py-24" id="how-it-works">
       <div className="container mx-auto px-6">
         <motion.div 
           ref={ref}

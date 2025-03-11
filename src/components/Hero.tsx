@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
@@ -47,7 +46,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-b from-[#fffdf5] via-[#fff8e6] to-secondary/30 min-h-screen flex items-center">
+    <div className="relative overflow-hidden min-h-screen flex items-center">
       <div className="max-w-7xl mx-auto">
         <div className="relative z-10 py-24 md:py-32 px-6 sm:px-8 xl:px-0">
           <div className="text-center max-w-4xl mx-auto">
@@ -63,7 +62,7 @@ const Hero = () => {
             </motion.h1>
             
             <motion.p 
-              className="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed"
+              className="text-lg md:text-xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed"
               custom={2}
               initial="hidden"
               animate="visible"
@@ -98,15 +97,6 @@ const Hero = () => {
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
       </div>
       
-      <div className="absolute bottom-0 left-0 right-0 h-80 bg-gradient-to-t from-secondary/30 to-transparent"></div>
-      
-      <div className="hidden lg:block absolute -bottom-10 left-1/2 -translate-x-1/2 w-full max-w-6xl">
-        <div className="relative">
-          <div className="absolute inset-0 rounded-t-3xl bg-gradient-to-t from-white via-white/80 to-transparent z-10"></div>
-          {/* Image placeholder kept intact */}
-        </div>
-      </div>
-
       {/* Scroll arrow indicator */}
       <motion.a 
         href="#platform-features"
