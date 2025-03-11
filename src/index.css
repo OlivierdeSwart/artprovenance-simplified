@@ -16,17 +16,17 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
 
-    --primary: 141 29% 22%; /* Changed from blue to green: rgb(40, 72, 52) */
+    --primary: 141 29% 22%; /* Dark forest green: rgb(40, 72, 52) */
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 120 30% 96%; /* Light green background */
+    --secondary: 43 75% 85%; /* Cream for background: rgb(242, 233, 196) */
     --secondary-foreground: 240 5.9% 10%;
 
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
 
-    --accent: 120 40% 94%; /* Light green accent */
-    --accent-foreground: 240 5.9% 10%;
+    --accent: 36 60% 50%; /* Rich gold accent: rgb(204, 153, 51) */
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -60,13 +60,13 @@
     --primary: 130 29% 42%; /* Lighter green for dark mode */
     --primary-foreground: 240 5.9% 10%;
 
-    --secondary: 140 10% 15%; /* Dark green secondary */
+    --secondary: 43 40% 25%; /* Darker cream for dark mode */
     --secondary-foreground: 0 0% 98%;
 
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
 
-    --accent: 140 20% 20%; /* Dark green accent */
+    --accent: 36 60% 45%; /* Darker gold for dark mode */
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;

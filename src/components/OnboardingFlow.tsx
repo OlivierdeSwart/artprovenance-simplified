@@ -17,35 +17,35 @@ const steps = [
     title: "Simple Account Creation",
     description: "Create an account with email & password. No technical knowledge needed.",
     icon: UserCircle,
-    color: "bg-green-600" // Forest green
+    color: "bg-primary" // Dark forest green
   },
   {
     id: 2,
     title: "Upload Artwork & Documentation",
     description: "Add high-resolution images and certificates of authenticity.",
     icon: Upload,
-    color: "bg-emerald-500" // Rich emerald
+    color: "bg-primary/90" // Slightly lighter forest green
   },
   {
     id: 3,
     title: "Verified Custodian Check",
     description: "Optional expert validation ensures trust and authenticity.",
     icon: Shield,
-    color: "bg-teal-600" // Deep teal
+    color: "bg-accent" // Rich gold
   },
   {
     id: 4,
     title: "Digital Proof & Ownership",
     description: "Artwork is recorded with immutable proof of ownership & provenance.",
     icon: FileCheck,
-    color: "bg-amber-600" // Rich gold
+    color: "bg-accent/90" // Slightly lighter gold
   },
   {
     id: 5,
     title: "Trade & Settle",
     description: "Buy or sell art with instant global settlement in any currency.",
     icon: CreditCard,
-    color: "bg-green-700" // Dark forest green
+    color: "bg-amber-800" // Rich brown
   }
 ];
 
@@ -89,7 +89,7 @@ const OnboardingFlow = () => {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-green-50" id="how-it-works">
+    <section className="py-24 bg-gradient-to-b from-white to-secondary/30" id="how-it-works">
       <div className="container mx-auto px-6">
         <motion.div 
           ref={ref}

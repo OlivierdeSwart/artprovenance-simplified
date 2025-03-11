@@ -10,42 +10,42 @@ const features = [
     title: "Global Market Access",
     description: "Connect with collectors worldwide, expanding your potential buyer pool beyond traditional geographic limitations.",
     icon: Globe,
-    color: "bg-green-100 text-green-600"
+    color: "bg-primary/10 text-primary"
   },
   {
     id: 2,
     title: "Verified Provenance",
     description: "Ensure trust and eliminate fraud risks with our digital verification system that tracks the complete history of each artwork.",
     icon: Shield,
-    color: "bg-emerald-100 text-emerald-600"
+    color: "bg-primary/10 text-primary"
   },
   {
     id: 3,
     title: "Enhanced Liquidity",
     description: "Make fine art more tradeable with instant settlements and reduced transaction friction across global markets.",
     icon: Banknote,
-    color: "bg-green-100 text-green-600"
+    color: "bg-accent/10 text-accent"
   },
   {
     id: 4,
     title: "Faster Settlements",
     description: "Reduce transaction time from weeks to seconds with our streamlined verification process.",
     icon: Clock,
-    color: "bg-amber-100 text-amber-600"
+    color: "bg-accent/10 text-accent"
   },
   {
     id: 5,
     title: "Fractional Ownership",
     description: "Enable partial investment in high-value artwork, making fine art accessible to more investors.",
     icon: PieChart,
-    color: "bg-teal-100 text-teal-600"
+    color: "bg-primary/10 text-primary"
   },
   {
     id: 6,
     title: "Art as Collateral",
     description: "Unlock financial opportunities backed by verified assets, enabling new possibilities for art-backed lending.",
     icon: FileStack,
-    color: "bg-emerald-100 text-emerald-600"
+    color: "bg-amber-800/10 text-amber-800" // Brown accent
   }
 ];
 
@@ -77,7 +77,7 @@ const FeatureSection = () => {
   };
 
   return (
-    <section className="py-24 bg-white" id="benefits">
+    <section className="py-24 bg-secondary/30" id="benefits">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary mb-4">

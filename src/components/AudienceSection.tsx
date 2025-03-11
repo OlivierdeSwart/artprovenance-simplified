@@ -33,7 +33,7 @@ const AudienceSection = () => {
   };
 
   return (
-    <section className="py-24 bg-green-50" id="who-we-serve">
+    <section className="py-24 bg-secondary/50" id="who-we-serve">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary mb-4">
@@ -58,8 +58,8 @@ const AudienceSection = () => {
           {/* For Art Collectors */}
           <motion.div variants={itemVariants} className="glass-card rounded-xl overflow-hidden">
             <div className="p-8 md:p-10">
-              <div className="w-14 h-14 flex items-center justify-center rounded-full bg-green-100 mb-6">
-                <ShieldCheck className="h-8 w-8 text-green-600" />
+              <div className="w-14 h-14 flex items-center justify-center rounded-full bg-primary/10 mb-6">
+                <ShieldCheck className="h-8 w-8 text-primary" />
               </div>
               <h3 className="text-2xl font-serif font-bold mb-4">For Art Collectors</h3>
               <p className="text-gray-600 mb-8">
@@ -69,8 +69,8 @@ const AudienceSection = () => {
               <div className="space-y-5">
                 <div className="flex">
                   <div className="flex-shrink-0 mr-4">
-                    <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center">
-                      <CreditCard className="h-4 w-4 text-green-600" />
+                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                      <CreditCard className="h-4 w-4 text-primary" />
                     </div>
                   </div>
                   <div>
@@ -81,8 +81,8 @@ const AudienceSection = () => {
                 
                 <div className="flex">
                   <div className="flex-shrink-0 mr-4">
-                    <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center">
-                      <ShieldCheck className="h-4 w-4 text-green-600" />
+                    <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
+                      <ShieldCheck className="h-4 w-4 text-accent" />
                     </div>
                   </div>
                   <div>
@@ -93,8 +93,8 @@ const AudienceSection = () => {
                 
                 <div className="flex">
                   <div className="flex-shrink-0 mr-4">
-                    <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center">
-                      <Hourglass className="h-4 w-4 text-green-600" />
+                    <div className="w-8 h-8 rounded-full bg-amber-800/10 flex items-center justify-center">
+                      <Hourglass className="h-4 w-4 text-amber-800" />
                     </div>
                   </div>
                   <div>
@@ -105,7 +105,7 @@ const AudienceSection = () => {
               </div>
               
               <div className="mt-10">
-                <Button className="w-full bg-green-600 hover:bg-green-700 text-white transition duration-300">
+                <Button className="w-full bg-primary hover:bg-primary/90 text-white transition duration-300">
                   Start Collecting
                 </Button>
               </div>
@@ -115,8 +115,8 @@ const AudienceSection = () => {
           {/* For Art Sellers */}
           <motion.div variants={itemVariants} className="glass-card rounded-xl overflow-hidden">
             <div className="p-8 md:p-10">
-              <div className="w-14 h-14 flex items-center justify-center rounded-full bg-emerald-100 mb-6">
-                <Globe className="h-8 w-8 text-emerald-600" />
+              <div className="w-14 h-14 flex items-center justify-center rounded-full bg-accent/10 mb-6">
+                <Globe className="h-8 w-8 text-accent" />
               </div>
               <h3 className="text-2xl font-serif font-bold mb-4">For Art Sellers</h3>
               <p className="text-gray-600 mb-8">
@@ -126,8 +126,8 @@ const AudienceSection = () => {
               <div className="space-y-5">
                 <div className="flex">
                   <div className="flex-shrink-0 mr-4">
-                    <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center">
-                      <Globe className="h-4 w-4 text-emerald-600" />
+                    <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
+                      <Globe className="h-4 w-4 text-accent" />
                     </div>
                   </div>
                   <div>
@@ -138,8 +138,8 @@ const AudienceSection = () => {
                 
                 <div className="flex">
                   <div className="flex-shrink-0 mr-4">
-                    <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center">
-                      <CreditCard className="h-4 w-4 text-emerald-600" />
+                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                      <CreditCard className="h-4 w-4 text-primary" />
                     </div>
                   </div>
                   <div>
@@ -150,8 +150,8 @@ const AudienceSection = () => {
                 
                 <div className="flex">
                   <div className="flex-shrink-0 mr-4">
-                    <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center">
-                      <ShieldCheck className="h-4 w-4 text-emerald-600" />
+                    <div className="w-8 h-8 rounded-full bg-amber-800/10 flex items-center justify-center">
+                      <ShieldCheck className="h-4 w-4 text-amber-800" />
                     </div>
                   </div>
                   <div>
@@ -162,7 +162,7 @@ const AudienceSection = () => {
               </div>
               
               <div className="mt-10">
-                <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white transition duration-300">
+                <Button className="w-full bg-accent hover:bg-accent/90 text-white transition duration-300">
                   Start Selling
                 </Button>
               </div>

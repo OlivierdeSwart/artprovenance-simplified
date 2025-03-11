@@ -24,7 +24,7 @@ const VerificationSection = () => {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-50 to-white" id="technology">
+    <section className="py-24 bg-gradient-to-b from-secondary/30 to-white" id="technology">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
@@ -61,8 +61,8 @@ const VerificationSection = () => {
                 className="flex"
               >
                 <div className="mr-4 flex-shrink-0">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-                    <Database className="h-6 w-6 text-green-600" aria-hidden="true" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                    <Database className="h-6 w-6 text-primary" aria-hidden="true" />
                   </div>
                 </div>
                 <div>
@@ -80,8 +80,8 @@ const VerificationSection = () => {
                 className="flex"
               >
                 <div className="mr-4 flex-shrink-0">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100">
-                    <FileLock className="h-6 w-6 text-emerald-600" aria-hidden="true" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10">
+                    <FileLock className="h-6 w-6 text-accent" aria-hidden="true" />
                   </div>
                 </div>
                 <div>
@@ -99,8 +99,8 @@ const VerificationSection = () => {
                 className="flex"
               >
                 <div className="mr-4 flex-shrink-0">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-teal-100">
-                    <Globe className="h-6 w-6 text-teal-600" aria-hidden="true" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-800/10">
+                    <Globe className="h-6 w-6 text-amber-800" aria-hidden="true" />
                   </div>
                 </div>
                 <div>
@@ -121,9 +121,9 @@ const VerificationSection = () => {
             className="relative"
           >
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-green-100 via-emerald-100 to-teal-100 rounded-2xl blur-lg opacity-50"></div>
-              <div className="glass-card relative rounded-xl overflow-hidden shadow-xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-emerald-500/10 to-teal-500/10"></div>
+              <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-accent/20 to-amber-800/10 rounded-2xl blur-lg opacity-50"></div>
+              <div className="glass-card relative rounded-xl overflow-hidden shadow-xl bg-secondary/80">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-amber-800/5"></div>
                 <div className="relative p-8">
                   <div className="mb-8 flex justify-between items-center border-b border-gray-200/50 pb-6">
                     <div>
@@ -183,7 +183,7 @@ const VerificationSection = () => {
                       <div className="text-xs text-gray-500">
                         <p>Last Verified: 2 days ago</p>
                       </div>
-                      <div className="bg-green-600 text-white text-xs px-3 py-1 rounded-full">
+                      <div className="bg-accent text-white text-xs px-3 py-1 rounded-full">
                         AUTHENTIC
                       </div>
                     </div>

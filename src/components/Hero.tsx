@@ -40,7 +40,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-b from-[#F2FCE2] via-[#E1F0D8] to-[#D0E8C9] min-h-screen flex items-center">
+    <div className="relative overflow-hidden bg-gradient-to-b from-secondary/30 via-secondary/20 to-white min-h-screen flex items-center">
       <div className="max-w-7xl mx-auto">
         <div className="relative z-10 py-24 md:py-32 px-6 sm:px-8 xl:px-0">
           <div className="text-center max-w-4xl mx-auto">
@@ -94,23 +94,18 @@ const Hero = () => {
         
         <div className="absolute inset-0 overflow-hidden">
           <div className="pointer-events-none absolute -top-40 -right-20 w-[600px] h-[600px] rounded-full bg-primary/5 blur-3xl"></div>
-          <div className="pointer-events-none absolute top-40 -left-20 w-[600px] h-[600px] rounded-full bg-green-500/5 blur-3xl"></div>
+          <div className="pointer-events-none absolute top-40 -left-20 w-[600px] h-[600px] rounded-full bg-accent/5 blur-3xl"></div>
         </div>
         
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
       </div>
       
-      <div className="absolute bottom-0 left-0 right-0 h-80 bg-gradient-to-t from-secondary/50 to-transparent"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-80 bg-gradient-to-t from-secondary/30 to-transparent"></div>
       
       <div className="hidden lg:block absolute -bottom-10 left-1/2 -translate-x-1/2 w-full max-w-6xl">
         <div className="relative">
           <div className="absolute inset-0 rounded-t-3xl bg-gradient-to-t from-white via-white/80 to-transparent z-10"></div>
-          {/* <img 
-            ref={imageRef}
-            src="/lovable-uploads/b6823b88-a286-449e-85b2-52c81994ab78.png" 
-            className="w-full h-auto rounded-t-3xl shadow-2xl shadow-black/5 transition-transform duration-500 ease-out" 
-            alt="Fine art gallery" 
-          /> */}
+          {/* Image placeholder kept intact */}
         </div>
       </div>
     </div>
