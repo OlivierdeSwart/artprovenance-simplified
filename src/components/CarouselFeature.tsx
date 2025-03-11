@@ -134,21 +134,18 @@ const CarouselFeature = () => {
                 <h3 className="text-3xl md:text-4xl font-bold text-center text-gray-900 font-serif">
                   {features[current].title}
                 </h3>
+                <p className="text-gray-600 text-lg text-center max-w-3xl mx-auto mt-2">
+                  {features[current].description}
+                </p>
               </div>
               
               <div className="relative flex-grow w-full overflow-hidden bg-gray-100">
                 <img
                   src={features[current].image}
                   alt={features[current].title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40"></div>
-              </div>
-              
-              <div className="p-6 bg-white">
-                <p className="text-gray-600 text-lg text-center max-w-3xl mx-auto">
-                  {features[current].description}
-                </p>
               </div>
             </motion.div>
           </AnimatePresence>
@@ -173,7 +170,7 @@ const CarouselFeature = () => {
           </Button>
 
           {/* Dots Indicator */}
-          <div className="absolute bottom-20 left-0 right-0 flex justify-center space-x-2">
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
             {features.map((_, index) => (
               <button
                 key={index}
