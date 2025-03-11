@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -42,10 +41,6 @@ const AudienceSection = () => {
           <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
             Benefits for Art Enthusiasts
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Whether you're collecting or selling fine art, our platform provides 
-            specific advantages tailored to your needs.
-          </p>
         </div>
 
         <motion.div
@@ -58,11 +53,8 @@ const AudienceSection = () => {
           {/* For Art Collectors */}
           <motion.div variants={itemVariants} className="glass-card rounded-xl overflow-hidden">
             <div className="p-8 md:p-10">
-              <div className="w-14 h-14 flex items-center justify-center rounded-full bg-primary/10 mb-6">
-                <ShieldCheck className="h-8 w-8 text-primary" />
-              </div>
               <h3 className="text-2xl font-serif font-bold mb-4">For Art Collectors</h3>
-              <p className="text-gray-600 mb-8">
+              <p className="text-gray-600 max-w-2xl mx-auto">
                 Discover a new way to collect with enhanced security, flexibility, and trust.
               </p>
               
@@ -115,11 +107,8 @@ const AudienceSection = () => {
           {/* For Art Sellers */}
           <motion.div variants={itemVariants} className="glass-card rounded-xl overflow-hidden">
             <div className="p-8 md:p-10">
-              <div className="w-14 h-14 flex items-center justify-center rounded-full bg-accent/10 mb-6">
-                <Globe className="h-8 w-8 text-accent" />
-              </div>
               <h3 className="text-2xl font-serif font-bold mb-4">For Art Sellers</h3>
-              <p className="text-gray-600 mb-8">
+              <p className="text-gray-600 max-w-2xl mx-auto">
                 Expand your reach and streamline your sales process with our global platform.
               </p>
               

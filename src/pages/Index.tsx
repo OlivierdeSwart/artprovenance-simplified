@@ -36,7 +36,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fffdf5]"> {/* Consistent cream background */}
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#fffdf5] to-[#fbf9f3]">
       <Navbar />
       <main className="flex-grow">
         <Hero />

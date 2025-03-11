@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from "@/components/ui/button";
@@ -31,7 +30,6 @@ const features = [
   }
 ];
 
-// Component to preload images
 const ImagePreloader = () => {
   return (
     <div className="hidden">
@@ -53,7 +51,6 @@ const CarouselFeature = () => {
   const [imagesLoaded, setImagesLoaded] = useState({});
   const length = features.length;
 
-  // Preload all images on component mount
   useEffect(() => {
     const preloadImages = async () => {
       const loadedStatus = { ...imagesLoaded };
@@ -80,7 +77,6 @@ const CarouselFeature = () => {
     preloadImages();
   }, []);
 
-  // Autoplay with pause on hover or interaction
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
     
@@ -110,7 +106,6 @@ const CarouselFeature = () => {
     setCurrent(index);
   };
 
-  // Handle mouse events for autoplay control
   const handleMouseEnter = () => setAutoplay(false);
   const handleMouseLeave = () => setAutoplay(true);
 
@@ -149,7 +144,6 @@ const CarouselFeature = () => {
     prevSlide();
   };
 
-  // Render all images off-screen to ensure they're loaded in the cache
   const renderHiddenImages = () => (
     <div className="absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none">
       {features.map(feature => (
@@ -177,7 +171,6 @@ const CarouselFeature = () => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          {/* Hidden preloaded images */}
           {renderHiddenImages()}
           
           <AnimatePresence initial={false} custom={direction} mode="wait">
@@ -190,8 +183,7 @@ const CarouselFeature = () => {
               exit="exit"
               className="absolute inset-0 w-full h-full flex flex-col"
             >
-              {/* Title positioned at the top */}
-              <div className="bg-white p-6 border-b">
+              <div className="p-6 bg-transparent backdrop-blur-sm border-b border-gray-200/20">
                 <h3 className="text-3xl md:text-4xl font-bold text-center text-gray-900 font-serif">
                   {features[current].title}
                 </h3>
@@ -212,7 +204,6 @@ const CarouselFeature = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation Arrows */}
           <Button 
             variant="secondary" 
             size="icon" 
@@ -231,7 +222,6 @@ const CarouselFeature = () => {
             <ChevronRight className="h-6 w-6" />
           </Button>
 
-          {/* Dots Indicator */}
           <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
             {features.map((_, index) => (
               <button

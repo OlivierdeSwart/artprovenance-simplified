@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,7 +7,7 @@ const Footer = () => {
   return (
     <footer className="border-t border-gray-200" id="signup-form">
       <div className="max-w-3xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-        <div className="glass-card p-8 rounded-xl border border-gray-100 bg-secondary backdrop-blur-md shadow-sm">
+        <div className="glass-card p-8 rounded-xl border border-gray-100 bg-[#fdfcfa]/50 backdrop-blur-md shadow-sm">
           <div className="text-center">
             <h2 className="text-3xl font-serif font-bold text-gray-900 mb-8">
               Change the Way You Art
