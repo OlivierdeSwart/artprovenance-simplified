@@ -31,10 +31,54 @@ const features = [
   }
 ];
 
+// Component to preload images
+const ImagePreloader = () => {
+  return (
+    <div className="hidden">
+      {features.map((feature) => (
+        <img 
+          key={feature.id} 
+          src={feature.image} 
+          alt={`Preload ${feature.title}`}
+          onLoad={() => console.log(`Preloaded: ${feature.title}`)}
+        />
+      ))}
+    </div>
+  );
+};
+
 const CarouselFeature = () => {
   const [current, setCurrent] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
+  const [imagesLoaded, setImagesLoaded] = useState({});
   const length = features.length;
+
+  // Preload all images on component mount
+  useEffect(() => {
+    const preloadImages = async () => {
+      const loadedStatus = { ...imagesLoaded };
+      
+      const preloadPromises = features.map((feature) => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = feature.image;
+          img.onload = () => {
+            loadedStatus[feature.id] = true;
+            resolve(feature.id);
+          };
+          img.onerror = () => {
+            console.error(`Failed to preload image for: ${feature.title}`);
+            resolve(feature.id);
+          };
+        });
+      });
+      
+      await Promise.all(preloadPromises);
+      setImagesLoaded(loadedStatus);
+    };
+    
+    preloadImages();
+  }, []);
 
   // Autoplay with pause on hover or interaction
   useEffect(() => {
@@ -105,6 +149,20 @@ const CarouselFeature = () => {
     prevSlide();
   };
 
+  // Render all images off-screen to ensure they're loaded in the cache
+  const renderHiddenImages = () => (
+    <div className="absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none">
+      {features.map(feature => (
+        <img 
+          key={`preload-${feature.id}`}
+          src={feature.image}
+          alt=""
+          crossOrigin="anonymous"
+        />
+      ))}
+    </div>
+  );
+
   return (
     <section className="w-full py-16 bg-white relative overflow-hidden" id="platform-features">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -119,6 +177,9 @@ const CarouselFeature = () => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
+          {/* Hidden preloaded images */}
+          {renderHiddenImages()}
+          
           <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div
               key={current}
@@ -144,6 +205,7 @@ const CarouselFeature = () => {
                   src={features[current].image}
                   alt={features[current].title}
                   className="w-full h-full object-contain"
+                  loading="eager"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40"></div>
               </div>
