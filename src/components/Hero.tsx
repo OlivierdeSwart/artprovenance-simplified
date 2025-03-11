@@ -40,7 +40,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-b from-white to-secondary/30 pt-20">
+    <div className="relative overflow-hidden bg-gradient-to-b from-[#F2FCE2] via-[#E1F0D8] to-[#D0E8C9] min-h-screen flex items-center">
       <div className="max-w-7xl mx-auto">
         <div className="relative z-10 py-24 md:py-32 px-6 sm:px-8 xl:px-0">
           <div className="text-center max-w-4xl mx-auto">
@@ -94,7 +94,7 @@ const Hero = () => {
         
         <div className="absolute inset-0 overflow-hidden">
           <div className="pointer-events-none absolute -top-40 -right-20 w-[600px] h-[600px] rounded-full bg-primary/5 blur-3xl"></div>
-          <div className="pointer-events-none absolute top-40 -left-20 w-[600px] h-[600px] rounded-full bg-blue-500/5 blur-3xl"></div>
+          <div className="pointer-events-none absolute top-40 -left-20 w-[600px] h-[600px] rounded-full bg-green-500/5 blur-3xl"></div>
         </div>
         
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>

@@ -10,14 +10,14 @@ const features = [
     title: "Global Market Access",
     description: "Connect with collectors worldwide, expanding your potential buyer pool beyond traditional geographic limitations.",
     icon: Globe,
-    color: "bg-blue-100 text-blue-600"
+    color: "bg-green-100 text-green-600"
   },
   {
     id: 2,
     title: "Verified Provenance",
     description: "Ensure trust and eliminate fraud risks with our digital verification system that tracks the complete history of each artwork.",
     icon: Shield,
-    color: "bg-indigo-100 text-indigo-600"
+    color: "bg-emerald-100 text-emerald-600"
   },
   {
     id: 3,
@@ -38,14 +38,14 @@ const features = [
     title: "Fractional Ownership",
     description: "Enable partial investment in high-value artwork, making fine art accessible to more investors.",
     icon: PieChart,
-    color: "bg-purple-100 text-purple-600"
+    color: "bg-teal-100 text-teal-600"
   },
   {
     id: 6,
     title: "Art as Collateral",
     description: "Unlock financial opportunities backed by verified assets, enabling new possibilities for art-backed lending.",
     icon: FileStack,
-    color: "bg-rose-100 text-rose-600"
+    color: "bg-emerald-100 text-emerald-600"
   }
 ];
 
