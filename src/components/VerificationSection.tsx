@@ -61,25 +61,6 @@ const VerificationSection = () => {
                 className="flex"
               >
                 <div className="mr-4 flex-shrink-0">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                    <Database className="h-6 w-6 text-primary" aria-hidden="true" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-lg font-medium">Private Ledger for Art Records</h3>
-                  <p className="mt-2 text-gray-600">
-                    We securely store all artwork details, provenance history, and ownership records
-                    in our private, encrypted ledger system.
-                  </p>
-                </div>
-              </motion.div>
-              
-              <motion.div 
-                custom={4} 
-                variants={fadeInUpVariants}
-                className="flex"
-              >
-                <div className="mr-4 flex-shrink-0">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10">
                     <FileLock className="h-6 w-6 text-accent" aria-hidden="true" />
                   </div>
@@ -94,7 +75,7 @@ const VerificationSection = () => {
               </motion.div>
               
               <motion.div 
-                custom={5} 
+                custom={4} 
                 variants={fadeInUpVariants}
                 className="flex"
               >
@@ -111,6 +92,25 @@ const VerificationSection = () => {
                   </p>
                 </div>
               </motion.div>
+              
+              <motion.div 
+                custom={5} 
+                variants={fadeInUpVariants}
+                className="flex"
+              >
+                <div className="mr-4 flex-shrink-0">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                    <Database className="h-6 w-6 text-primary" aria-hidden="true" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-lg font-medium">Private Ledger for Art Records</h3>
+                  <p className="mt-2 text-gray-600">
+                    We securely store all artwork details, provenance history, and ownership records
+                    in our private, encrypted ledger system.
+                  </p>
+                </div>
+              </motion.div>
             </div>
           </div>
           
@@ -122,7 +122,7 @@ const VerificationSection = () => {
           >
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-accent/20 to-amber-800/10 rounded-2xl blur-lg opacity-50"></div>
-              <div className="glass-card relative rounded-xl overflow-hidden shadow-xl bg-secondary/80">
+              <div className="glass-card relative rounded-xl overflow-hidden shadow-xl bg-[#fbf9f3] border-2 border-accent">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-amber-800/5"></div>
                 <div className="relative p-8">
                   <div className="mb-8 flex justify-between items-center border-b border-gray-200/50 pb-6">

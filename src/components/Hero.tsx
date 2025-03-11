@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
@@ -46,7 +47,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-b from-secondary/30 via-secondary/20 to-white min-h-screen flex items-center">
+    <div className="relative overflow-hidden bg-gradient-to-b from-[#fffdf5] via-[#fff8e6] to-secondary/30 min-h-screen flex items-center">
       <div className="max-w-7xl mx-auto">
         <div className="relative z-10 py-24 md:py-32 px-6 sm:px-8 xl:px-0">
           <div className="text-center max-w-4xl mx-auto">

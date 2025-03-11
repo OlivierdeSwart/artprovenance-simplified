@@ -8,14 +8,11 @@ const Footer = () => {
   return (
     <footer className="bg-white border-t border-gray-200" id="signup-form">
       <div className="max-w-3xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-        <div className="glass-card p-8 rounded-xl border border-gray-100 bg-white/60 backdrop-blur-md shadow-sm">
+        <div className="glass-card p-8 rounded-xl border border-gray-100 bg-secondary/60 backdrop-blur-md shadow-sm">
           <div className="text-center">
-            <h2 className="text-3xl font-serif font-bold text-gray-900 mb-2">
-              Transform Your Fine Art into Digital Legacy
+            <h2 className="text-3xl font-serif font-bold text-gray-900 mb-8">
+              Change the Way You Art
             </h2>
-            <p className="text-gray-500 mb-8">
-              Bridge the physical and digital realms of art collection through blockchain technology. Your masterpiece, your legacy, reimagined.
-            </p>
             <div className="max-w-md mx-auto">
               <div className="flex flex-col space-y-4">
                 <Input

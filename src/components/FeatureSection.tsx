@@ -10,28 +10,28 @@ const features = [
     title: "Global Market Access",
     description: "Connect with collectors worldwide, expanding your potential buyer pool beyond traditional geographic limitations.",
     icon: Globe,
-    color: "bg-primary/10 text-primary"
+    color: "bg-accent/10 text-accent"
   },
   {
     id: 2,
     title: "Verified Provenance",
     description: "Ensure trust and eliminate fraud risks with our digital verification system that tracks the complete history of each artwork.",
     icon: Shield,
-    color: "bg-primary/10 text-primary"
+    color: "bg-accent/10 text-accent"
   },
   {
     id: 3,
     title: "Enhanced Liquidity",
     description: "Make fine art more tradeable with instant settlements and reduced transaction friction across global markets.",
     icon: Banknote,
-    color: "bg-accent/10 text-accent"
+    color: "bg-amber-800/10 text-amber-800"
   },
   {
     id: 4,
     title: "Faster Settlements",
     description: "Reduce transaction time from weeks to seconds with our streamlined verification process.",
     icon: Clock,
-    color: "bg-accent/10 text-accent"
+    color: "bg-amber-800/10 text-amber-800"
   },
   {
     id: 5,
@@ -45,7 +45,7 @@ const features = [
     title: "Art as Collateral",
     description: "Unlock financial opportunities backed by verified assets, enabling new possibilities for art-backed lending.",
     icon: FileStack,
-    color: "bg-amber-800/10 text-amber-800" // Brown accent
+    color: "bg-primary/10 text-primary"
   }
 ];
 

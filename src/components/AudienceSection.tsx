@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -68,8 +69,8 @@ const AudienceSection = () => {
               <div className="space-y-5">
                 <div className="flex">
                   <div className="flex-shrink-0 mr-4">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                      <CreditCard className="h-4 w-4 text-primary" />
+                    <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
+                      <CreditCard className="h-4 w-4 text-accent" />
                     </div>
                   </div>
                   <div>
@@ -80,8 +81,8 @@ const AudienceSection = () => {
                 
                 <div className="flex">
                   <div className="flex-shrink-0 mr-4">
-                    <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
-                      <ShieldCheck className="h-4 w-4 text-accent" />
+                    <div className="w-8 h-8 rounded-full bg-amber-800/10 flex items-center justify-center">
+                      <ShieldCheck className="h-4 w-4 text-amber-800" />
                     </div>
                   </div>
                   <div>
@@ -92,8 +93,8 @@ const AudienceSection = () => {
                 
                 <div className="flex">
                   <div className="flex-shrink-0 mr-4">
-                    <div className="w-8 h-8 rounded-full bg-amber-800/10 flex items-center justify-center">
-                      <Hourglass className="h-4 w-4 text-amber-800" />
+                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Hourglass className="h-4 w-4 text-primary" />
                     </div>
                   </div>
                   <div>
@@ -137,8 +138,8 @@ const AudienceSection = () => {
                 
                 <div className="flex">
                   <div className="flex-shrink-0 mr-4">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                      <CreditCard className="h-4 w-4 text-primary" />
+                    <div className="w-8 h-8 rounded-full bg-amber-800/10 flex items-center justify-center">
+                      <CreditCard className="h-4 w-4 text-amber-800" />
                     </div>
                   </div>
                   <div>
@@ -149,8 +150,8 @@ const AudienceSection = () => {
                 
                 <div className="flex">
                   <div className="flex-shrink-0 mr-4">
-                    <div className="w-8 h-8 rounded-full bg-amber-800/10 flex items-center justify-center">
-                      <ShieldCheck className="h-4 w-4 text-amber-800" />
+                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                      <ShieldCheck className="h-4 w-4 text-primary" />
                     </div>
                   </div>
                   <div>

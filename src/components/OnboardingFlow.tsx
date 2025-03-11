@@ -17,14 +17,14 @@ const steps = [
     title: "Simple Account Creation",
     description: "Create an account with email & password. No technical knowledge needed.",
     icon: UserCircle,
-    color: "bg-primary" // Dark forest green
+    color: "bg-amber-800" // Rich brown (was green)
   },
   {
     id: 2,
     title: "Upload Artwork & Documentation",
     description: "Add high-resolution images and certificates of authenticity.",
     icon: Upload,
-    color: "bg-primary/90" // Slightly lighter forest green
+    color: "bg-accent/90" // Slightly lighter gold
   },
   {
     id: 3,
@@ -38,14 +38,14 @@ const steps = [
     title: "Digital Proof & Ownership",
     description: "Artwork is recorded with immutable proof of ownership & provenance.",
     icon: FileCheck,
-    color: "bg-accent/90" // Slightly lighter gold
+    color: "bg-primary/90" // Slightly lighter forest green
   },
   {
     id: 5,
     title: "Trade & Settle",
     description: "Buy or sell art with instant global settlement in any currency.",
     icon: CreditCard,
-    color: "bg-amber-800" // Rich brown
+    color: "bg-primary" // Dark forest green (was brown)
   }
 ];
 
