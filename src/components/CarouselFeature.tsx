@@ -87,7 +87,7 @@ const CarouselFeature = () => {
     if (autoplay) {
       interval = setInterval(() => {
         setCurrent(prev => (prev === length - 1 ? 0 : prev + 1));
-      }, 5000);
+      }, 7000);
     }
     
     return () => {
