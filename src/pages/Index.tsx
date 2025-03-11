@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import CarouselFeature from '@/components/CarouselFeature';
 import OnboardingFlow from '@/components/OnboardingFlow';
 import FeatureSection from '@/components/FeatureSection';
 import VerificationSection from '@/components/VerificationSection';
@@ -39,6 +40,7 @@ const Index = () => {
       <Navbar />
       <main className="flex-grow">
         <Hero />
+        <CarouselFeature />
         <OnboardingFlow />
         <FeatureSection />
         <VerificationSection />
