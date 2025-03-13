@@ -10,7 +10,7 @@ interface Point {
 
 const PaintCursor = () => {
   const [points, setPoints] = useState<Point[]>([]);
-  const trailRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const isInitialRender = useRef(true);
 
   // Artistic color palette
@@ -65,8 +65,8 @@ const PaintCursor = () => {
 
   useEffect(() => {
     // Render the trail
-    if (trailRef.current && points.length > 1) {
-      const ctx = trailRef.current.getContext('2d');
+    if (canvasRef.current && points.length > 1) {
+      const ctx = canvasRef.current.getContext('2d');
       if (!ctx) return;
 
       // Clear the canvas
@@ -105,9 +105,9 @@ const PaintCursor = () => {
   // Handle canvas resize
   useEffect(() => {
     const handleResize = () => {
-      if (trailRef.current) {
-        trailRef.current.width = window.innerWidth;
-        trailRef.current.height = window.innerHeight;
+      if (canvasRef.current) {
+        canvasRef.current.width = window.innerWidth;
+        canvasRef.current.height = window.innerHeight;
       }
     };
 
@@ -121,7 +121,7 @@ const PaintCursor = () => {
 
   return (
     <canvas
-      ref={trailRef}
+      ref={canvasRef}
       className="fixed inset-0 w-full h-full pointer-events-none z-40"
       style={{ mixBlendMode: 'multiply' }}
     />
