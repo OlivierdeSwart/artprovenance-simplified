@@ -117,11 +117,8 @@ const PaintCursor = () => {
           ctx.beginPath();
           ctx.moveTo(previous.x, previous.y);
           
-          // Create a more natural, slightly curved line
-          const controlX = (previous.x + current.x) / 2 + (Math.random() * 7 - 3.5);
-          const controlY = (previous.y + current.y) / 2 + (Math.random() * 7 - 3.5);
-          
-          ctx.quadraticCurveTo(controlX, controlY, current.x, current.y);
+          // Draw direct line without random offsets
+          ctx.lineTo(current.x, current.y);
           
           // Set line style with fixed width
           ctx.strokeStyle = current.color;
