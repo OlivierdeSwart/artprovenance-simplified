@@ -1,19 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
-
-interface Point {
-  x: number;
-  y: number;
-  color: string;
-  timestamp: number;
-  velocity: number;
-}
+import React, { useEffect, useRef } from 'react';
 
 const PaintCursor = () => {
-  const [points, setPoints] = useState<Point[]>([]);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const isInitialRender = useRef(true);
-  const prevMousePosition = useRef({ x: 0, y: 0 });
-  const lastMoveTime = useRef(Date.now());
 
   // Colors inspired by classical paintings
   const classicalColors = [
@@ -33,99 +21,104 @@ const PaintCursor = () => {
     '#D3E4FD', '#FDE1D3', '#FFDEE2', '#E5DEFF', '#FEC6A1', '#FEF7CD', '#F2FCE2'
   ];
 
-  const getRandomColor = () => {
+  function getRandomColor() {
     return classicalColors[Math.floor(Math.random() * classicalColors.length)];
-  };
-
-  // Calculate velocity between points
-  const calculateVelocity = (x1: number, y1: number, x2: number, y2: number, timeDiff: number) => {
-    const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-    return distance / Math.max(timeDiff, 1); // Avoid division by zero
-  };
+  }
 
   useEffect(() => {
-    // Skip initial render to prevent initial animation
-    if (isInitialRender.current) {
-      isInitialRender.current = false;
-      return;
-    }
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    // Handle mouse movement
+    // Set canvas to window size
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Initialize vars
+    let pointerDown = false;
+    let lastPoint: {x: number, y: number} | null = null;
+    let lastMoveTime = Date.now();
+    let points: Array<{x: number, y: number, color: string, timestamp: number, velocity: number}> = [];
+
+    // Calculate velocity between points
+    const calculateVelocity = (x1: number, y1: number, x2: number, y2: number, timeDiff: number) => {
+      const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+      return distance / Math.max(timeDiff, 1); // Avoid division by zero
+    };
+
+    // Mouse event handlers
     const handleMouseMove = (e: MouseEvent) => {
       const now = Date.now();
-      const velocity = calculateVelocity(
-        prevMousePosition.current.x, 
-        prevMousePosition.current.y, 
-        e.clientX, 
-        e.clientY,
-        now - lastMoveTime.current
-      );
-      
-      const newPoint: Point = {
-        x: e.clientX,
-        y: e.clientY,
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      let velocity = 0;
+      if (lastPoint) {
+        velocity = calculateVelocity(
+          lastPoint.x, 
+          lastPoint.y, 
+          x, 
+          y,
+          now - lastMoveTime
+        );
+      }
+
+      points.push({
+        x,
+        y,
         color: getRandomColor(),
         timestamp: now,
-        velocity: velocity
-      };
+        velocity: velocity,
+      });
 
-      setPoints(prevPoints => [...prevPoints, newPoint]);
-      
-      prevMousePosition.current = { x: e.clientX, y: e.clientY };
-      lastMoveTime.current = now;
+      lastPoint = { x, y };
+      lastMoveTime = now;
     };
 
-    // Cleanup old points periodically
-    const cleanupInterval = setInterval(() => {
+    // Animation loop
+    function animate() {
+      // Fade existing content slightly
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Draw trail
       const now = Date.now();
-      // Keep points longer (3 seconds instead of 1)
-      setPoints(prevPoints => prevPoints.filter(point => now - point.timestamp < 3000));
-    }, 100);
+      
+      // Keep only points less than 3 seconds old
+      points = points.filter(point => now - point.timestamp < 3000);
 
-    window.addEventListener('mousemove', handleMouseMove);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      clearInterval(cleanupInterval);
-    };
-  }, []);
-
-  useEffect(() => {
-    // Render the trail
-    if (canvasRef.current && points.length > 1) {
-      const ctx = canvasRef.current.getContext('2d');
-      if (!ctx) return;
-
-      // Clear the canvas
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-
-      // Draw trail segments
+      // Draw connections between points if we have at least 2
       for (let i = 1; i < points.length; i++) {
-        const prevPoint = points[i - 1];
-        const currentPoint = points[i];
-        const age = Date.now() - currentPoint.timestamp;
+        const current = points[i];
+        const previous = points[i - 1];
         
-        // Slower fadeout - 3 seconds instead of 1
-        const opacity = Math.max(0, 1 - age / 3000); 
+        // Calculate age-based opacity (slower fadeout - 3 seconds)
+        const age = now - current.timestamp;
+        const opacity = Math.max(0, 1 - age / 3000);
         
         if (opacity > 0) {
-          // Only draw if there's visible opacity
           ctx.beginPath();
-          ctx.moveTo(prevPoint.x, prevPoint.y);
+          ctx.moveTo(previous.x, previous.y);
           
           // Create a more natural, slightly curved line
-          const controlX = (prevPoint.x + currentPoint.x) / 2 + (Math.random() * 7 - 3.5);
-          const controlY = (prevPoint.y + currentPoint.y) / 2 + (Math.random() * 7 - 3.5);
+          const controlX = (previous.x + current.x) / 2 + (Math.random() * 7 - 3.5);
+          const controlY = (previous.y + current.y) / 2 + (Math.random() * 7 - 3.5);
           
-          ctx.quadraticCurveTo(controlX, controlY, currentPoint.x, currentPoint.y);
+          ctx.quadraticCurveTo(controlX, controlY, current.x, current.y);
           
           // Line width based on velocity - thinner when moving faster, thicker when slow
-          // This creates a more natural brush effect
-          const velocityFactor = Math.max(0.1, Math.min(1.0, 1.0 / currentPoint.velocity));
+          const velocityFactor = Math.max(0.1, Math.min(1.0, 1.0 / current.velocity));
           const baseWidth = 12 * velocityFactor;
           
           // Set line style
-          ctx.strokeStyle = `${currentPoint.color}`;
+          ctx.strokeStyle = current.color;
           ctx.globalAlpha = opacity;
           
           // Line gets thinner as it fades, but remains thicker for slower movements
@@ -138,32 +131,34 @@ const PaintCursor = () => {
           ctx.stroke();
           
           // Add a subtle glow effect at slow points
-          if (currentPoint.velocity < 0.3 && opacity > 0.5) {
+          if (current.velocity < 0.3 && opacity > 0.5) {
             ctx.beginPath();
-            ctx.arc(currentPoint.x, currentPoint.y, width * 1.5, 0, Math.PI * 2);
-            ctx.fillStyle = currentPoint.color;
+            ctx.arc(current.x, current.y, width * 1.5, 0, Math.PI * 2);
+            ctx.fillStyle = current.color;
             ctx.globalAlpha = opacity * 0.3;
             ctx.fill();
           }
         }
       }
-    }
-  }, [points]);
-
-  // Handle canvas resize
-  useEffect(() => {
-    const handleResize = () => {
-      if (canvasRef.current) {
-        canvasRef.current.width = window.innerWidth;
-        canvasRef.current.height = window.innerHeight;
+      
+      // Clean up old points periodically to prevent memory issues
+      if (points.length > 1000) {
+        points = points.slice(-1000);
       }
-    };
+      
+      requestAnimationFrame(animate);
+    }
 
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
+    // Start animation
+    animate();
+    
+    // Add mouse event listeners
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    // Cleanup
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', resizeCanvas);
     };
   }, []);
 
