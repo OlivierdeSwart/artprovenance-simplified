@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 
 const PaintCursor = () => {
@@ -70,16 +69,6 @@ const PaintCursor = () => {
           y,
           now - lastMoveTime
         );
-        
-        // Only add points if they're far enough apart to prevent overlapping
-        // This helps eliminate the dark spots at connection points
-        const minDistance = 5; // Minimum distance between points
-        const distance = Math.sqrt(Math.pow(x - lastPoint.x, 2) + Math.pow(y - lastPoint.y, 2));
-        
-        if (distance < minDistance) {
-          // Skip adding this point if it's too close to the last one
-          return;
-        }
       }
       
       // Change color less frequently for slow movements
@@ -105,7 +94,7 @@ const PaintCursor = () => {
 
     // Animation loop
     function animate() {
-      // Clear the canvas completely
+      // Clear the canvas completely instead of just fading it
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Draw trail
@@ -114,57 +103,33 @@ const PaintCursor = () => {
       // Keep only points less than 2 seconds old (reduced from 3 seconds)
       points = points.filter(point => now - point.timestamp < 2000);
 
-      // Draw line segments using quadratic curves for smoother appearance
-      if (points.length > 2) {
-        for (let i = 1; i < points.length - 1; i++) {
-          const point1 = points[i - 1];
-          const point2 = points[i];
-          const point3 = points[i + 1];
-          
-          // Calculate age-based opacity for smoother fadeout
-          const age = now - point2.timestamp;
-          const opacity = Math.max(0, 1 - age / 2000);
-          
-          if (opacity > 0) {
-            // Set style for this segment
-            ctx.strokeStyle = point2.color;
-            ctx.fillStyle = point2.color;
-            ctx.globalAlpha = opacity;
-            ctx.lineWidth = 5;
-            
-            // Draw the curve
-            ctx.beginPath();
-            
-            // Start from the previous point
-            ctx.moveTo(point1.x, point1.y);
-            
-            // Use a curve to the next point (smoother than straight lines)
-            ctx.quadraticCurveTo(point2.x, point2.y, point3.x, point3.y);
-            
-            // Set properties for smooth rendering
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-            ctx.stroke();
-          }
-        }
-      }
-      // Handle special cases with fewer points
-      else if (points.length === 2) {
-        const point1 = points[0];
-        const point2 = points[1];
+      // Draw connections between points if we have at least 2
+      for (let i = 1; i < points.length; i++) {
+        const current = points[i];
+        const previous = points[i - 1];
         
-        const age = now - point2.timestamp;
+        // Calculate age-based opacity (faster fadeout - 2 seconds)
+        const age = now - current.timestamp;
         const opacity = Math.max(0, 1 - age / 2000);
         
         if (opacity > 0) {
-          ctx.strokeStyle = point2.color;
-          ctx.globalAlpha = opacity;
-          ctx.lineWidth = 5;
-          ctx.lineCap = 'round';
-          
           ctx.beginPath();
-          ctx.moveTo(point1.x, point1.y);
-          ctx.lineTo(point2.x, point2.y);
+          ctx.moveTo(previous.x, previous.y);
+          
+          // Draw direct line without random offsets
+          ctx.lineTo(current.x, current.y);
+          
+          // Set line style with fixed width
+          ctx.strokeStyle = current.color;
+          ctx.globalAlpha = opacity;
+          
+          // Fixed line width for the trail
+          const baseWidth = 5;
+          ctx.lineWidth = baseWidth;
+          
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+          
           ctx.stroke();
         }
       }
