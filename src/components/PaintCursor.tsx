@@ -1,33 +1,37 @@
 
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface CursorPosition {
   x: number;
   y: number;
 }
 
-interface TrailDot {
+interface SplashParticle {
   id: number;
   position: CursorPosition;
+  size: number;
+  angle: number;
+  distance: number;
   color: string;
+  scale: number;
 }
 
 const PaintCursor = () => {
   const [position, setPosition] = useState<CursorPosition>({ x: 0, y: 0 });
-  const [trail, setTrail] = useState<TrailDot[]>([]);
-  const [isActive, setIsActive] = useState(false);
+  const [splashes, setSplashes] = useState<SplashParticle[]>([]);
+  const [showCursor, setShowCursor] = useState(true);
 
   // Classical painting inspired colors
   const classicalColors = [
-    '#E5DEFF', // Soft purple
-    '#FEF7CD', // Soft yellow
-    '#FDE1D3', // Soft peach
-    '#D3E4FD', // Soft blue
-    '#FFDEE2', // Soft pink
-    '#F2FCE2', // Soft green
-    '#FEC6A1', // Soft orange
-    '#F1F0FB', // Soft gray
+    '#8A3324', // Burnt Sienna
+    '#D5A021', // Yellow Ochre
+    '#3A414A', // Payne's Gray
+    '#704F4F', // Venetian Red
+    '#254052', // Prussian Blue
+    '#3F5E5A', // Viridian
+    '#8B3B2B', // Terra Rosa
+    '#BFA372', // Naples Yellow
   ];
 
   const getRandomColor = () => {
@@ -37,80 +41,115 @@ const PaintCursor = () => {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleMouseClick = (e: MouseEvent) => {
+      // Create splash effect
+      const newSplashes = [];
+      const particleCount = Math.floor(Math.random() * 8) + 12; // 12-20 particles
       
-      if (isActive) {
-        // Add a new dot to the trail
-        setTrail((prevTrail) => [
-          ...prevTrail.slice(-25), // Keep only the last 25 dots for performance
-          {
-            id: Date.now(),
-            position: { x: e.clientX, y: e.clientY },
-            color: getRandomColor(),
-          },
-        ]);
+      for (let i = 0; i < particleCount; i++) {
+        const angle = Math.random() * Math.PI * 2; // Random angle in radians
+        const distance = Math.random() * 100 + 20; // Random distance between 20-120px
+        const size = Math.random() * 20 + 5; // Random size between 5-25px
+        const scale = Math.random() * 0.5 + 0.5; // Random scale between 0.5-1.0
+        
+        newSplashes.push({
+          id: Date.now() + i,
+          position: { x: e.clientX, y: e.clientY },
+          size,
+          angle,
+          distance,
+          color: getRandomColor(),
+          scale,
+        });
       }
+      
+      setSplashes((prevSplashes) => [...prevSplashes, ...newSplashes]);
+      
+      // Clean up old splashes after a delay
+      setTimeout(() => {
+        setSplashes((prevSplashes) => 
+          prevSplashes.filter(splash => !newSplashes.includes(splash))
+        );
+      }, 1000);
     };
 
-    const handleMouseDown = () => {
-      setIsActive(true);
-    };
-
-    const handleMouseUp = () => {
-      setIsActive(false);
-      // Clear the trail after lifting the mouse
-      setTimeout(() => setTrail([]), 1000);
-    };
+    // Handle cursor visibility when leaving/entering window
+    const handleMouseLeave = () => setShowCursor(false);
+    const handleMouseEnter = () => setShowCursor(true);
 
     // Add event listeners
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('click', handleMouseClick);
+    document.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('mouseenter', handleMouseEnter);
 
     // Cleanup
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mousedown', handleMouseDown);
-      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('click', handleMouseClick);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, [isActive]);
+  }, []);
 
   return (
     <>
-      {/* Main cursor */}
-      <motion.div
-        className="fixed w-6 h-6 rounded-full pointer-events-none z-50 mix-blend-multiply"
-        style={{
-          backgroundColor: getRandomColor(),
-          x: position.x - 12,
-          y: position.y - 12,
-        }}
-        animate={{
-          scale: isActive ? 1.2 : 1,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 300,
-          damping: 20
-        }}
-      />
-
-      {/* Paint trail */}
-      {trail.map((dot, index) => (
+      {/* Custom cursor */}
+      {showCursor && (
         <motion.div
-          key={dot.id}
-          className="fixed rounded-full pointer-events-none z-40 mix-blend-multiply opacity-80"
+          className="fixed w-5 h-5 rounded-full pointer-events-none z-50 mix-blend-multiply"
           style={{
-            backgroundColor: dot.color,
-            x: dot.position.x - 8,
-            y: dot.position.y - 8,
-            width: `${16 - index * 0.2}px`,
-            height: `${16 - index * 0.2}px`,
+            backgroundColor: classicalColors[0],
+            x: position.x - 10,
+            y: position.y - 10,
+            boxShadow: '0 0 10px rgba(0,0,0,0.15)'
           }}
-          initial={{ opacity: 0.8, scale: 1 }}
-          animate={{ opacity: 0, scale: 0.5 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          animate={{
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 0.3,
+            ease: "easeInOut",
+            times: [0, 0.5, 1],
+            repeat: Infinity,
+            repeatDelay: 0.5
+          }}
         />
-      ))}
+      )}
+
+      {/* Splash particles */}
+      <AnimatePresence>
+        {splashes.map((splash) => (
+          <motion.div
+            key={splash.id}
+            className="fixed rounded-full pointer-events-none z-40"
+            style={{
+              backgroundColor: splash.color,
+              width: splash.size,
+              height: splash.size,
+              x: splash.position.x,
+              y: splash.position.y,
+            }}
+            initial={{ 
+              opacity: 0.8,
+              scale: 0
+            }}
+            animate={{ 
+              opacity: 0,
+              scale: splash.scale,
+              x: splash.position.x + Math.cos(splash.angle) * splash.distance,
+              y: splash.position.y + Math.sin(splash.angle) * splash.distance,
+            }}
+            exit={{ opacity: 0 }}
+            transition={{ 
+              duration: 0.8, 
+              ease: "easeOut"
+            }}
+          />
+        ))}
+      </AnimatePresence>
     </>
   );
 };
