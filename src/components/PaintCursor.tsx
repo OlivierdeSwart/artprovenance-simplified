@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 
 const PaintCursor = () => {
@@ -115,22 +116,21 @@ const PaintCursor = () => {
         if (opacity > 0) {
           ctx.beginPath();
           ctx.moveTo(previous.x, previous.y);
-          
-          // Draw direct line without random offsets
           ctx.lineTo(current.x, current.y);
           
-          // Set line style with fixed width
+          // Set line style
           ctx.strokeStyle = current.color;
-          ctx.globalAlpha = opacity;
+          ctx.globalAlpha = opacity; // Apply opacity only for this stroke
           
           // Fixed line width for the trail
-          const baseWidth = 5;
-          ctx.lineWidth = baseWidth;
-          
+          ctx.lineWidth = 5;
           ctx.lineCap = 'round';
           ctx.lineJoin = 'round';
           
           ctx.stroke();
+          
+          // Reset globalAlpha to prevent opacity stacking
+          ctx.globalAlpha = 1;
         }
       }
       
