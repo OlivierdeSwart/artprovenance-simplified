@@ -18,11 +18,11 @@ const Navbar = () => {
     '#D3E4FD', '#FDE1D3', '#FFDEE2', '#E5DEFF', '#FEC6A1', '#FEF7CD', '#F2FCE2' // Soft muted colors
   ];
   
-  // Assign specific colors to each section
+  // Assign specific colors to each section with improved contrast for "benefits"
   const sectionColors = {
     'platform-features': classicalColors[3], // Van Gogh yellow
     'how-it-works': classicalColors[9],      // Monet green
-    'benefits': classicalColors[12],         // Renoir pink
+    'benefits': '#D946EF',                   // Using a higher contrast magenta pink for benefits
     'technology': classicalColors[15],       // Turner orange
     'who-we-serve': classicalColors[0],      // Vermeer blue
   };
