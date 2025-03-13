@@ -94,24 +94,23 @@ const PaintCursor = () => {
 
     // Animation loop
     function animate() {
-      // Fade existing content slightly
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Clear the canvas completely instead of just fading it
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Draw trail
       const now = Date.now();
       
-      // Keep only points less than 3 seconds old
-      points = points.filter(point => now - point.timestamp < 3000);
+      // Keep only points less than 2 seconds old (reduced from 3 seconds)
+      points = points.filter(point => now - point.timestamp < 2000);
 
       // Draw connections between points if we have at least 2
       for (let i = 1; i < points.length; i++) {
         const current = points[i];
         const previous = points[i - 1];
         
-        // Calculate age-based opacity (slower fadeout - 3 seconds)
+        // Calculate age-based opacity (faster fadeout - 2 seconds)
         const age = now - current.timestamp;
-        const opacity = Math.max(0, 1 - age / 3000);
+        const opacity = Math.max(0, 1 - age / 2000);
         
         if (opacity > 0) {
           ctx.beginPath();
