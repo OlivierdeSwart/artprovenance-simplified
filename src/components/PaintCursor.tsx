@@ -19,8 +19,10 @@ interface SplashParticle {
 
 const PaintCursor = () => {
   const [position, setPosition] = useState<CursorPosition>({ x: 0, y: 0 });
+  const [isClicking, setIsClicking] = useState(false);
   const [splashes, setSplashes] = useState<SplashParticle[]>([]);
   const [showCursor, setShowCursor] = useState(true);
+  const [trail, setTrail] = useState<CursorPosition[]>([]);
 
   // Classical painting inspired colors
   const classicalColors = [
@@ -40,23 +42,39 @@ const PaintCursor = () => {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+      const newPosition = { x: e.clientX, y: e.clientY };
+      setPosition(newPosition);
+      
+      // Add to trail with throttling (every other position)
+      setTrail(prev => {
+        const newTrail = [...prev, newPosition];
+        return newTrail.slice(-10); // Keep only last 10 positions for performance
+      });
     };
 
-    const handleMouseClick = (e: MouseEvent) => {
+    const handleMouseDown = () => {
+      setIsClicking(true);
+      createSplashEffect(position);
+    };
+
+    const handleMouseUp = () => {
+      setIsClicking(false);
+    };
+
+    const createSplashEffect = (pos: CursorPosition) => {
       // Create splash effect
       const newSplashes = [];
-      const particleCount = Math.floor(Math.random() * 8) + 12; // 12-20 particles
+      const particleCount = Math.floor(Math.random() * 8) + 18; // 18-26 particles
       
       for (let i = 0; i < particleCount; i++) {
         const angle = Math.random() * Math.PI * 2; // Random angle in radians
-        const distance = Math.random() * 100 + 20; // Random distance between 20-120px
-        const size = Math.random() * 20 + 5; // Random size between 5-25px
-        const scale = Math.random() * 0.5 + 0.5; // Random scale between 0.5-1.0
+        const distance = Math.random() * 120 + 30; // Random distance between 30-150px
+        const size = Math.random() * 25 + 8; // Random size between 8-33px
+        const scale = Math.random() * 0.7 + 0.5; // Random scale between 0.5-1.2
         
         newSplashes.push({
           id: Date.now() + i,
-          position: { x: e.clientX, y: e.clientY },
+          position: { x: pos.x, y: pos.y },
           size,
           angle,
           distance,
@@ -65,14 +83,14 @@ const PaintCursor = () => {
         });
       }
       
-      setSplashes((prevSplashes) => [...prevSplashes, ...newSplashes]);
+      setSplashes(prevSplashes => [...prevSplashes, ...newSplashes]);
       
       // Clean up old splashes after a delay
       setTimeout(() => {
-        setSplashes((prevSplashes) => 
+        setSplashes(prevSplashes => 
           prevSplashes.filter(splash => !newSplashes.includes(splash))
         );
-      }, 1000);
+      }, 1500); // Increased duration for more visible effect
     };
 
     // Handle cursor visibility when leaving/entering window
@@ -81,40 +99,75 @@ const PaintCursor = () => {
 
     // Add event listeners
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('click', handleMouseClick);
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseUp);
     document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('mouseenter', handleMouseEnter);
+
+    // Add click listener for mobile
+    window.addEventListener('click', () => {
+      createSplashEffect(position);
+    });
 
     // Cleanup
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('click', handleMouseClick);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
+      window.removeEventListener('click', () => {});
     };
-  }, []);
+  }, [position]);
 
   return (
     <>
+      {/* Trail effect */}
+      <AnimatePresence>
+        {trail.map((pos, index) => (
+          <motion.div
+            key={`trail-${index}`}
+            className="fixed rounded-full pointer-events-none z-40 mix-blend-multiply"
+            style={{
+              backgroundColor: getRandomColor(),
+              width: Math.max(6, 15 - index * 1.5),
+              height: Math.max(6, 15 - index * 1.5),
+              x: pos.x - (Math.max(6, 15 - index * 1.5) / 2),
+              y: pos.y - (Math.max(6, 15 - index * 1.5) / 2),
+              opacity: 1 - (index * 0.1),
+            }}
+            initial={{ scale: 0.2, opacity: 0.8 }}
+            animate={{ scale: 1, opacity: 0.5 - (index * 0.05) }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          />
+        ))}
+      </AnimatePresence>
+
       {/* Custom cursor */}
       {showCursor && (
         <motion.div
-          className="fixed w-5 h-5 rounded-full pointer-events-none z-50 mix-blend-multiply"
+          className="fixed pointer-events-none z-50 mix-blend-multiply"
           style={{
-            backgroundColor: classicalColors[0],
-            x: position.x - 10,
-            y: position.y - 10,
-            boxShadow: '0 0 10px rgba(0,0,0,0.15)'
+            backgroundColor: isClicking ? classicalColors[2] : classicalColors[0],
+            width: isClicking ? 18 : 12,
+            height: isClicking ? 18 : 12,
+            borderRadius: '50%',
+            x: position.x - (isClicking ? 9 : 6),
+            y: position.y - (isClicking ? 9 : 6),
+            boxShadow: isClicking 
+              ? '0 0 15px rgba(0,0,0,0.3)' 
+              : '0 0 10px rgba(0,0,0,0.15)'
           }}
           animate={{
-            scale: [1, 1.2, 1],
+            scale: isClicking ? [1, 1.4, 1] : [1, 1.2, 1],
           }}
           transition={{
-            duration: 0.3,
+            duration: isClicking ? 0.2 : 0.3,
             ease: "easeInOut",
             times: [0, 0.5, 1],
             repeat: Infinity,
-            repeatDelay: 0.5
+            repeatDelay: isClicking ? 0.1 : 0.5
           }}
         />
       )}
@@ -124,28 +177,30 @@ const PaintCursor = () => {
         {splashes.map((splash) => (
           <motion.div
             key={splash.id}
-            className="fixed rounded-full pointer-events-none z-40"
+            className="fixed rounded-full pointer-events-none z-40 mix-blend-multiply"
             style={{
               backgroundColor: splash.color,
               width: splash.size,
               height: splash.size,
-              x: splash.position.x,
-              y: splash.position.y,
+              x: splash.position.x - (splash.size / 2),
+              y: splash.position.y - (splash.size / 2),
+              boxShadow: '0 0 8px rgba(0,0,0,0.1)',
             }}
             initial={{ 
               opacity: 0.8,
               scale: 0
             }}
             animate={{ 
-              opacity: 0,
+              opacity: [0.8, 0.4, 0],
               scale: splash.scale,
-              x: splash.position.x + Math.cos(splash.angle) * splash.distance,
-              y: splash.position.y + Math.sin(splash.angle) * splash.distance,
+              x: splash.position.x - (splash.size / 2) + Math.cos(splash.angle) * splash.distance,
+              y: splash.position.y - (splash.size / 2) + Math.sin(splash.angle) * splash.distance,
             }}
             exit={{ opacity: 0 }}
             transition={{ 
-              duration: 0.8, 
-              ease: "easeOut"
+              duration: 1.2, 
+              ease: "easeOut",
+              times: [0, 0.7, 1]
             }}
           />
         ))}
