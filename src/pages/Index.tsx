@@ -2,12 +2,13 @@
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import CarouselFeature from '@/components/CarouselFeature';
+import CarouselFeature from '@/components/carousel/CarouselFeature';
 import OnboardingFlow from '@/components/OnboardingFlow';
 import FeatureSection from '@/components/FeatureSection';
 import VerificationSection from '@/components/VerificationSection';
 import AudienceSection from '@/components/AudienceSection';
 import Footer from '@/components/Footer';
+import PaintCursor from '@/components/PaintCursor';
 
 const Index = () => {
   useEffect(() => {
@@ -37,6 +38,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#fffdf5] to-[#fbf9f3]">
+      <PaintCursor />
       <Navbar />
       <main className="flex-grow">
         <Hero />
