@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 
 const PaintCursor = () => {
@@ -41,9 +42,10 @@ const PaintCursor = () => {
     if (!ctx) return;
 
     // Initialize vars
-    let pointerDown = false;
     let lastPoint: {x: number, y: number} | null = null;
     let lastMoveTime = Date.now();
+    let lastColorChangeTime = Date.now();
+    let currentColor = getRandomColor();
     let points: Array<{x: number, y: number, color: string, timestamp: number, velocity: number}> = [];
 
     // Calculate velocity between points
@@ -69,11 +71,21 @@ const PaintCursor = () => {
           now - lastMoveTime
         );
       }
+      
+      // Change color less frequently for slow movements
+      // Only change color after a certain time threshold or if moving faster
+      const isMovingSlow = velocity < 0.3;
+      const colorChangeDelay = isMovingSlow ? 800 : 300; // Longer delay for slow movements
+      
+      if (now - lastColorChangeTime > colorChangeDelay) {
+        currentColor = getRandomColor();
+        lastColorChangeTime = now;
+      }
 
       points.push({
         x,
         y,
-        color: getRandomColor(),
+        color: currentColor,
         timestamp: now,
         velocity: velocity,
       });
@@ -130,10 +142,12 @@ const PaintCursor = () => {
           
           ctx.stroke();
           
-          // Add a subtle glow effect at slow points
+          // Add a subtle glow effect at slow points - now 50% larger when moving slowly
           if (current.velocity < 0.3 && opacity > 0.5) {
             ctx.beginPath();
-            ctx.arc(current.x, current.y, width * 1.5, 0, Math.PI * 2);
+            // Make dots 50% larger when moving slowly (multiply by 1.5)
+            const glowRadius = width * 2.25; // Increased from 1.5 to 2.25 (50% larger)
+            ctx.arc(current.x, current.y, glowRadius, 0, Math.PI * 2);
             ctx.fillStyle = current.color;
             ctx.globalAlpha = opacity * 0.3;
             ctx.fill();
