@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 
 const PaintCursor = () => {
@@ -103,34 +104,34 @@ const PaintCursor = () => {
       // Keep only points less than 2 seconds old (reduced from 3 seconds)
       points = points.filter(point => now - point.timestamp < 2000);
 
-      // Draw connections between points if we have at least 2
-      for (let i = 1; i < points.length; i++) {
-        const current = points[i];
-        const previous = points[i - 1];
-        
-        // Calculate age-based opacity (faster fadeout - 2 seconds)
-        const age = now - current.timestamp;
-        const opacity = Math.max(0, 1 - age / 2000);
-        
-        if (opacity > 0) {
-          ctx.beginPath();
-          ctx.moveTo(previous.x, previous.y);
+      // Use a smoother drawing approach for the trails
+      if (points.length > 1) {
+        for (let i = 1; i < points.length; i++) {
+          const current = points[i];
+          const previous = points[i - 1];
           
-          // Draw direct line without random offsets
-          ctx.lineTo(current.x, current.y);
+          // Calculate age-based opacity (fadeout - 2 seconds)
+          const age = now - current.timestamp;
+          const opacity = Math.max(0, 1 - age / 2000);
           
-          // Set line style with fixed width
-          ctx.strokeStyle = current.color;
-          ctx.globalAlpha = opacity;
-          
-          // Fixed line width for the trail
-          const baseWidth = 5;
-          ctx.lineWidth = baseWidth;
-          
-          ctx.lineCap = 'round';
-          ctx.lineJoin = 'round';
-          
-          ctx.stroke();
+          if (opacity > 0) {
+            // Draw path with rounded caps to eliminate visible connection points
+            ctx.beginPath();
+            ctx.moveTo(previous.x, previous.y);
+            ctx.lineTo(current.x, current.y);
+            
+            ctx.strokeStyle = current.color;
+            ctx.globalAlpha = opacity;
+            
+            // Fixed line width for the trail
+            ctx.lineWidth = 5;
+            
+            // These settings help create smoother connections
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            ctx.stroke();
+          }
         }
       }
       
