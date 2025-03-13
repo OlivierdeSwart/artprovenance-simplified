@@ -135,17 +135,6 @@ const PaintCursor = () => {
           ctx.lineJoin = 'round';
           
           ctx.stroke();
-          
-          // Add a subtle glow effect at certain points
-          if (i % 3 === 0 && opacity > 0.5) {
-            ctx.beginPath();
-            // Fixed glow radius
-            const glowRadius = baseWidth * 2;
-            ctx.arc(current.x, current.y, glowRadius, 0, Math.PI * 2);
-            ctx.fillStyle = current.color;
-            ctx.globalAlpha = opacity * 0.3;
-            ctx.fill();
-          }
         }
       }
       
