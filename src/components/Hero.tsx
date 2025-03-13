@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
@@ -58,7 +59,7 @@ const Hero = () => {
               variants={fadeInUpVariants}
             >
               Digital Fine Art: <br />
-              <span className="text-primary">Own, Trade, and Verify</span> <br /> with Ease and Security
+              <span className="text-primary">Own, Trade, and Verify</span>
             </motion.h1>
             
             <motion.p 
@@ -68,7 +69,7 @@ const Hero = () => {
               animate="visible"
               variants={fadeInUpVariants}
             >
-              Seamless access to authenticated fine art. Provenance you can trust. Instant, secure global transactions.
+              Seamless access to authenticated fine art. Provenance you can trust, security you can rely on, and effortless transactions worldwide.
             </motion.p>
             
             <motion.div

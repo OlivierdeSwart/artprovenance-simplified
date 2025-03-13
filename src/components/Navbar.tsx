@@ -22,7 +22,7 @@ const Navbar = () => {
   const sectionColors = {
     'platform-features': classicalColors[3], // Van Gogh yellow
     'how-it-works': classicalColors[9],      // Monet green
-    'benefits': '#D946EF',                   // Using a higher contrast magenta pink for benefits
+    'benefits': '#8B5CF6',                   // Using vivid purple for benefits (from color palette)
     'technology': classicalColors[15],       // Turner orange
     'who-we-serve': classicalColors[0],      // Vermeer blue
   };
