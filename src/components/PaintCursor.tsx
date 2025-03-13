@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 
 const PaintCursor = () => {
@@ -46,7 +45,7 @@ const PaintCursor = () => {
     let lastMoveTime = Date.now();
     let lastColorChangeTime = Date.now();
     let currentColor = getRandomColor();
-    let points: Array<{x: number, y: number, color: string, timestamp: number, velocity: number}> = [];
+    let points: Array<{x: number, y: number, color: string, timestamp: number}> = [];
 
     // Calculate velocity between points
     const calculateVelocity = (x1: number, y1: number, x2: number, y2: number, timeDiff: number) => {
@@ -86,8 +85,7 @@ const PaintCursor = () => {
         x,
         y,
         color: currentColor,
-        timestamp: now,
-        velocity: velocity,
+        timestamp: now
       });
 
       lastPoint = { x, y };
@@ -125,28 +123,24 @@ const PaintCursor = () => {
           
           ctx.quadraticCurveTo(controlX, controlY, current.x, current.y);
           
-          // Line width based on velocity - thinner when moving faster, thicker when slow
-          const velocityFactor = Math.max(0.1, Math.min(1.0, 1.0 / current.velocity));
-          const baseWidth = 12 * velocityFactor;
-          
-          // Set line style
+          // Set line style with fixed width
           ctx.strokeStyle = current.color;
           ctx.globalAlpha = opacity;
           
-          // Line gets thinner as it fades, but remains thicker for slower movements
-          const width = Math.max(1, baseWidth * opacity);
-          ctx.lineWidth = width;
+          // Fixed line width for the trail
+          const baseWidth = 5;
+          ctx.lineWidth = baseWidth;
           
           ctx.lineCap = 'round';
           ctx.lineJoin = 'round';
           
           ctx.stroke();
           
-          // Add a subtle glow effect at slow points - now 50% larger when moving slowly
-          if (current.velocity < 0.3 && opacity > 0.5) {
+          // Add a subtle glow effect at certain points
+          if (i % 3 === 0 && opacity > 0.5) {
             ctx.beginPath();
-            // Make dots 50% larger when moving slowly (multiply by 1.5)
-            const glowRadius = width * 2.25; // Increased from 1.5 to 2.25 (50% larger)
+            // Fixed glow radius
+            const glowRadius = baseWidth * 2;
             ctx.arc(current.x, current.y, glowRadius, 0, Math.PI * 2);
             ctx.fillStyle = current.color;
             ctx.globalAlpha = opacity * 0.3;
