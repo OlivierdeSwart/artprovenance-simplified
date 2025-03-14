@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 
 const PaintCursor = () => {
@@ -109,29 +108,21 @@ const PaintCursor = () => {
         const current = points[i];
         const previous = points[i - 1];
         
-        // Calculate age-based opacity (faster fadeout - 2 seconds)
-        const age = now - current.timestamp;
-        const opacity = Math.max(0, 1 - age / 2000);
+        // No opacity-based fading - removed age-based opacity calculation
+        ctx.beginPath();
+        ctx.moveTo(previous.x, previous.y);
+        ctx.lineTo(current.x, current.y);
         
-        if (opacity > 0) {
-          ctx.beginPath();
-          ctx.moveTo(previous.x, previous.y);
-          ctx.lineTo(current.x, current.y);
-          
-          // Set line style
-          ctx.strokeStyle = current.color;
-          ctx.globalAlpha = opacity; // Apply opacity only for this stroke
-          
-          // Fixed line width for the trail
-          ctx.lineWidth = 5;
-          ctx.lineCap = 'round';
-          ctx.lineJoin = 'round';
-          
-          ctx.stroke();
-          
-          // Reset globalAlpha to prevent opacity stacking
-          ctx.globalAlpha = 1;
-        }
+        // Set line style without opacity
+        ctx.strokeStyle = current.color;
+        // Removed opacity setting - keeping full opacity
+        
+        // Fixed line width for the trail
+        ctx.lineWidth = 5;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        
+        ctx.stroke();
       }
       
       // Clean up old points periodically to prevent memory issues
